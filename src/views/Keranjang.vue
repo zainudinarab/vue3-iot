@@ -41,10 +41,10 @@
               </thead>
               <tbody>
                 <tr v-for="(keranjang, index) in keranjangs" :key="keranjang.id">
-                  <th>{{index+1}}</th>
+                  <th>{{ index + 1 }}</th>
                   <td>
                     <img
-                      :src=" '../assets/images/' + keranjang.products.gambar "
+                      :src="'../assets/images/' + keranjang.products.gambar"
                       class="img-fluid shadow"
                       width="250"
                     />
@@ -52,11 +52,11 @@
                   <td>
                     <strong>{{ keranjang.products.nama }}</strong>
                   </td>
-                  <td>{{ keranjang.keterangan ? keranjang.keterangan : "-" }}</td>
+                  <td>{{ keranjang.keterangan ? keranjang.keterangan : '-' }}</td>
                   <td>{{ keranjang.jumlah_pemesanan }}</td>
                   <td align="right">Rp. {{ keranjang.products.harga }}</td>
                   <td align="right">
-                    <strong>Rp. {{ keranjang.products.harga*keranjang.jumlah_pemesanan }}</strong>
+                    <strong>Rp. {{ keranjang.products.harga * keranjang.jumlah_pemesanan }}</strong>
                   </td>
                   <td align="center" class="text-danger">
                     <b-icon-trash @click="hapusKeranjang(keranjang.id)"></b-icon-trash>
@@ -102,91 +102,89 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
-import axios from "axios";
+import Navbar from '@/components/Navbar.vue'
+import axios from 'axios'
 
 export default {
-  name: "Keranjang",
+  name: 'Keranjang',
   components: {
-    Navbar,
+    // Navbar,
   },
   data() {
     return {
       keranjangs: [],
       pesan: {},
-    };
+    }
   },
   methods: {
     setKeranjangs(data) {
-      this.keranjangs = data;
+      this.keranjangs = data
     },
     hapusKeranjang(id) {
       axios
-        .delete("http://localhost:3000/keranjangs/" + id)
+        .delete('http://localhost:3000/keranjangs/' + id)
         .then(() => {
-          this.$toast.error("Sukses Hapus Keranjang", {
-            type: "error",
-            position: "top-right",
+          this.$toast.error('Sukses Hapus Keranjang', {
+            type: 'error',
+            position: 'top-right',
             duration: 3000,
             dismissible: true,
-          });
+          })
 
           // Update Data keranjang
           axios
-            .get("http://localhost:3000/keranjangs")
+            .get('http://localhost:3000/keranjangs')
             .then((response) => this.setKeranjangs(response.data))
-            .catch((error) => console.log(error));
+            .catch((error) => console.log(error))
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
     },
     checkout() {
       if (this.pesan.nama && this.pesan.noMeja) {
-        this.pesan.keranjangs = this.keranjangs;
+        this.pesan.keranjangs = this.keranjangs
         axios
-          .post("http://localhost:3000/pesanans", this.pesan)
+          .post('http://localhost:3000/pesanans', this.pesan)
           .then(() => {
-
-            // Hapus Semua Keranjang 
+            // Hapus Semua Keranjang
             this.keranjangs.map(function (item) {
               return axios
-                .delete("http://localhost:3000/keranjangs/" + item.id)
-                .catch((error) => console.log(error));
-            });
+                .delete('http://localhost:3000/keranjangs/' + item.id)
+                .catch((error) => console.log(error))
+            })
 
-            this.$router.push({ path: "/pesanan-sukses" });
-            this.$toast.success("Sukses Dipesan", {
-              type: "success",
-              position: "top-right",
+            this.$router.push({ path: '/pesanan-sukses' })
+            this.$toast.success('Sukses Dipesan', {
+              type: 'success',
+              position: 'top-right',
               duration: 3000,
               dismissible: true,
-            });
+            })
           })
-          .catch((err) => console.log(err));
+          .catch((err) => console.log(err))
       } else {
-        this.$toast.error("Nama dan Nomor Meja Harus diisi", {
-          type: "error",
-          position: "top-right",
+        this.$toast.error('Nama dan Nomor Meja Harus diisi', {
+          type: 'error',
+          position: 'top-right',
           duration: 3000,
           dismissible: true,
-        });
+        })
       }
     },
   },
   mounted() {
     axios
-      .get("http://localhost:3000/keranjangs")
+      .get('http://localhost:3000/keranjangs')
       .then((response) => this.setKeranjangs(response.data))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
   },
   computed: {
     totalHarga() {
       return this.keranjangs.reduce(function (items, data) {
-        return items + data.products.harga * data.jumlah_pemesanan;
-      }, 0);
+        return items + data.products.harga * data.jumlah_pemesanan
+      }, 0)
     },
   },
-};
+}
 </script>
 
-<style>
-</style>
+<style></style>
