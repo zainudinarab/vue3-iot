@@ -45,6 +45,10 @@
                 </span>
               </router-link>
             </li>
+            <!-- Tombol Logout -->
+            <li class="nav-item">
+              <button class="btn btn-danger" @click="logout">Logout</button>
+            </li>
           </ul>
         </div>
       </div>
@@ -66,6 +70,14 @@ export default {
   methods: {
     setJumlah(data) {
       this.jumlah_pesanans = data
+    },
+    logout() {
+      // Hapus token dan data pengguna dari localStorage
+      localStorage.removeItem('token')
+      localStorage.removeItem('user')
+
+      // Redirect ke halaman login
+      this.$router.push({ name: 'login' })
     },
   },
   mounted() {

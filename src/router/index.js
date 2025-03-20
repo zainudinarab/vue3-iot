@@ -7,6 +7,9 @@ import Keranjang from '../views/Keranjang.vue'
 import PesananSukses from '../views/PesananSukses.vue'
 import LampuPage from '@/views/LampuPage.vue' // Path ke komponen halaman LampuPage
 import DevicePage from '../views/DevicePage.vue' // Path ke komponen halaman LampuPage
+import Login from '../components/Login.vue'
+import Register from '../components/Register.vue'
+import Dashboard from '../views/Dashboard.vue' // Mengimpor Dashboard
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +18,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+      meta: { requiresAuth: true },
     },
     {
       path: '/',
@@ -51,6 +55,21 @@ const router = createRouter({
       name: 'device',
       component: DevicePage, // Halaman dengan komponen Lampu
     },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register,
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: Dashboard, // Menambahkan rute untuk dashboard
+    },
 
     {
       path: '/about',
@@ -62,5 +81,15 @@ const router = createRouter({
     },
   ],
 })
-
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!localStorage.getItem('token')) {
+      next({ name: 'login' })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
 export default router
