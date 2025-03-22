@@ -3,7 +3,7 @@
     <!-- Navbar Bootstrap 5 -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="#">Kulineran</a>
+        <a class="navbar-brand" href="#">Smart Class</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -32,7 +32,7 @@
               <!-- Link ke Halaman Lampu -->
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/device">Gedungs</router-link>
+              <router-link class="nav-link" to="/gedungs">Gedungs</router-link>
               <!-- Link ke Halaman Lampu -->
             </li>
             <li class="nav-item">

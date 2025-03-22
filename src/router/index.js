@@ -10,8 +10,12 @@ import DevicePage from '../views/DevicePage.vue' // Path ke komponen halaman Lam
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import Dashboard from '../views/Dashboard.vue' // Mengimpor Dashboard
-import Perangkat from '@/views/Perangkat.vue';
-import KelasView from '@/views/KelasView.vue';
+import Perangkat from '@/views/Perangkat.vue'
+import KelasView from '@/views/KelasView.vue'
+import Gedung from '@/views/Gedung.vue'
+import GedungList from '@/views/GedungList.vue' // Mengimpor komponen GedungList
+import GedungCreate from '@/views/GedungCreate.vue' // Mengimpor komponen GedungCreate
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -82,7 +86,21 @@ const router = createRouter({
       name: 'kelasview',
       component: KelasView, // Menambahkan rute untuk dashboard
     },
-
+    {
+      path: '/gedungs',
+      name: 'gedungs',
+      component: Gedung, // Menambahkan rute untuk dashboard
+    },
+    {
+      path: '/gedung',
+      name: 'gedung',
+      component: GedungList, // Menampilkan daftar gedung di homepage
+    },
+    {
+      path: '/create-gedung',
+      name: 'create-gedung',
+      component: GedungCreate, // Halaman untuk menambah gedung
+    },
     {
       path: '/about',
       name: 'about',
