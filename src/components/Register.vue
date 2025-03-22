@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import api from '../axios'
+import api from '../api/axios'
 
 export default {
   data() {

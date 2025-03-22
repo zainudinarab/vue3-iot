@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import api from '../axios' // Mengimpor instance axios kamu
+import api from '../api/axios' // Mengimpor instance axios kamu
 
 export default {
   data() {

@@ -10,7 +10,8 @@ import DevicePage from '../views/DevicePage.vue' // Path ke komponen halaman Lam
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
 import Dashboard from '../views/Dashboard.vue' // Mengimpor Dashboard
-
+import Perangkat from '@/views/Perangkat.vue';
+import KelasView from '@/views/KelasView.vue';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -69,6 +70,17 @@ const router = createRouter({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard, // Menambahkan rute untuk dashboard
+    },
+    {
+      path: '/perangkat',
+      name: 'perangkat',
+      component: Perangkat, // Menambahkan rute untuk dashboard
+    },
+
+    {
+      path: '/kelasview',
+      name: 'kelasview',
+      component: KelasView, // Menambahkan rute untuk dashboard
     },
 
     {

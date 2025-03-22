@@ -31,6 +31,18 @@
               <router-link class="nav-link" to="/device">lampu device</router-link>
               <!-- Link ke Halaman Lampu -->
             </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/device">Gedungs</router-link>
+              <!-- Link ke Halaman Lampu -->
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/device">Lantai</router-link>
+              <!-- Link ke Halaman Lampu -->
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link" to="/device">lampu device</router-link>
+              <!-- Link ke Halaman Lampu -->
+            </li>
           </ul>
 
           <!-- Right aligned nav items -->
