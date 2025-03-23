@@ -55,7 +55,7 @@ export default {
   // Ambil data kelas dan perangkat
   async getRuangan() {
     try {
-      const response = await apiClient.get('/ruangans')
+      const response = await apiClient.get('/perangkat-by-ruangan')
       return response.data
     } catch (error) {
       console.error('Error fetching kelas list:', error)

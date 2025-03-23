@@ -32,15 +32,15 @@
               <!-- Link ke Halaman Lampu -->
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/gedungs">Gedungs</router-link>
+              <router-link class="nav-link" to="/gedungs">Gedung</router-link>
               <!-- Link ke Halaman Lampu -->
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/device">Lantai</router-link>
+              <router-link class="nav-link" to="/ruangans">Rungan</router-link>
               <!-- Link ke Halaman Lampu -->
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" to="/device">lampu device</router-link>
+              <router-link class="nav-link" to="/perangkats">Perangakat</router-link>
               <!-- Link ke Halaman Lampu -->
             </li>
           </ul>

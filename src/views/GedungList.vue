@@ -1,64 +1,57 @@
 <template>
-  <div class="container">
-    <h1>Daftar Gedung</h1>
-    <table border="1" cellpadding="10">
-      <thead>
+  <div class="container mt-4">
+    <h2>Daftar Gedung</h2>
+    <button class="btn btn-primary mb-3" @click="showForm(null)">Tambah Gedung</button>
+
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
         <tr>
+          <th>ID</th>
           <th>Nama Gedung</th>
-          <th>Keterangan</th>
           <th>Jumlah Lantai</th>
           <th>Aksi</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="gedung in gedungs" :key="gedung.id">
+          <td>{{ gedung.id }}</td>
           <td>{{ gedung.nama }}</td>
-          <td>{{ gedung.keterangan }}</td>
           <td>{{ gedung.jumlah_lantai }}</td>
           <td>
-            <button @click="deleteGedung(gedung.id)">Hapus</button>
-            <router-link :to="{ name: 'edit-gedung', params: { id: gedung.id } }">
-              Edit
-            </router-link>
+            <button class="btn btn-warning btn-sm me-2" @click="showForm(gedung)">Edit</button>
+            <button class="btn btn-danger btn-sm" @click="confirmDelete(gedung.id)">Hapus</button>
           </td>
         </tr>
       </tbody>
     </table>
-    <router-link to="/create-gedung">Tambah Gedung</router-link>
+
+    <GedungForm :gedung="selectedGedung" @saved="loadGedungs" />
   </div>
 </template>
 
-<script>
-import api from '@/api/api' // Mengimpor API yang berisi Object Method
+<script setup>
+import { ref, onMounted } from "vue";
+import { getGedungs, deleteGedung } from "@/api/gedung";
+import GedungForm from "@/components/gedungs/GedungForm.vue";
+import { Modal } from "bootstrap";
 
-export default {
-  data() {
-    return {
-      gedungs: [], // Menyimpan data gedung
-    }
-  },
-  created() {
-    this.fetchGedungs() // Mengambil daftar gedung saat komponen dibuat
-  },
-  methods: {
-    // Fungsi untuk mengambil data gedung
-    async fetchGedungs() {
-      try {
-        this.gedungs = await api.getGedungs() // Menggunakan Object Method untuk mengambil data
-      } catch (error) {
-        console.error('Error fetching gedungs:', error)
-      }
-    },
+const gedungs = ref([]);
+const selectedGedung = ref(null);
 
-    // Fungsi untuk menghapus gedung
-    async deleteGedung(id) {
-      try {
-        await api.deleteGedung(id) // Menggunakan Object Method untuk menghapus gedung
-        this.gedungs = this.gedungs.filter((gedung) => gedung.id !== id) // Menghapus dari list lokal
-      } catch (error) {
-        console.error('Error deleting gedung:', error)
-      }
-    },
-  },
-}
+const loadGedungs = async () => gedungs.value = await getGedungs();
+
+const showForm = (gedung) => {
+  selectedGedung.value = gedung;
+  const modal = new Modal(document.getElementById("gedungModal"));
+  modal.show();
+};
+
+const confirmDelete = async (id) => {
+  if (confirm("Hapus gedung ini?")) {
+    await deleteGedung(id);
+    loadGedungs();
+  }
+};
+
+onMounted(loadGedungs);
 </script>
