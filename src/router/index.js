@@ -5,17 +5,17 @@ import Home from '../views/Home.vue'
 import FoodDetail from '../views/FoodDetail.vue'
 import Keranjang from '../views/Keranjang.vue'
 import PesananSukses from '../views/PesananSukses.vue'
-import LampuPage from '@/views/LampuPage.vue' // Path ke komponen halaman LampuPage
-import DevicePage from '../views/DevicePage.vue' // Path ke komponen halaman LampuPage
+import LampuPage from '@/views/LampuPage.vue'
+import DevicePage from '../views/DevicePage.vue'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
-import Dashboard from '../views/Dashboard.vue' // Mengimpor Dashboard
+import Dashboard from '../views/Dashboard.vue'
 import Perangkat from '@/views/Perangkat.vue'
-import KelasView from '@/views/KelasView.vue'
-import GedungList from '@/views/GedungList.vue' // Mengimpor komponen GedungLisngCreatet
-// ruangan
-import RuanganList from '@/views/RuanganList.vue'
-import RuanganForm from "@/components/ruangans/RuanganForm.vue";
+import GedungList from '@/views/GedungList.vue'
+
+import RuanganList from '@/components/ruangans/RuanganList.vue'
+import RuanganForm from '@/components/ruangans/RuanganForm.vue'
+import ControlPerangkat from '@/views/ControlPerangkat.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,11 +26,7 @@ const router = createRouter({
       component: HomeView,
       meta: { requiresAuth: true },
     },
-    {
-      path: '/',
-      name: 'home2',
-      component: Home,
-    },
+
     {
       path: '/foods',
       name: 'Foods',
@@ -83,23 +79,21 @@ const router = createRouter({
     },
 
     {
-      path: '/kelasview',
-      name: 'kelasview',
-      component: KelasView, // Menambahkan rute untuk dashboard
+      path: '/control-perangkat',
+      name: 'control-perangkat',
+      component: ControlPerangkat, // Menambahkan rute untuk dashboard
     },
 
     {
       path: '/gedungs',
       name: 'gedungs',
-      component: GedungList
+      component: GedungList,
     },
 
-    {
-      path: '/ruangans',
-      name: 'ruangans',
-      component: RuanganList
-    },
-    { path: "/ruangans/:id?", name: "RuanganForm", component: RuanganForm },
+    { path: '/ruangans', component: RuanganList },
+    { path: '/ruangans/new', component: RuanganForm }, // Halaman Tambah Ruangan
+    { path: '/ruangans/:id', component: RuanganForm, props: true }, // Halaman Edit Ruangan
+    // { path: '/perangkats', component: PerangkatList }, // Tambahkan ini
     {
       path: '/about',
       name: 'about',

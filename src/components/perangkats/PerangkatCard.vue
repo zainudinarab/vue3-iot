@@ -52,22 +52,28 @@ export default {
 
 <style scoped>
 .card {
-  margin-bottom: 10px;
+  margin-bottom: 15px; /* Menambahkan margin bawah di luar card */
 }
 
 .card-body {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Default 2 kolom untuk layar kecil */
   gap: 20px;
+  padding: 10px; /* Tambahkan padding untuk memberi ruang antara card dan konten */
+  justify-items: center; /* Menjaga agar kolom terpusat secara horizontal */
+  align-items: start; /* Membuat konten dalam card lebih rata di bagian atas */
 }
 
 .device-column {
   display: grid;
-  gap: 15px;
+  gap: 1px;
+  margin-bottom: 5px; /* Memberi jarak antar perangkat */
+  justify-items: center; /* Menjaga agar perangkat dalam kolom terpusat secara horizontal */
 }
 
 .device-item {
   text-align: center;
+  margin-bottom: 10px; /* Memberi jarak di bawah setiap perangkat */
 }
 
 .device-label {
@@ -78,7 +84,7 @@ export default {
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
+  width: 60px; /* Ukuran lebar switch lebih konsisten */
   height: 34px;
 }
 
@@ -130,6 +136,7 @@ input:disabled + .slider:before {
 
 .sensor-item {
   text-align: center;
+  margin-bottom: 10px; /* Memberi jarak antar sensor */
 }
 
 .digital-frame {
@@ -150,6 +157,21 @@ input:disabled + .slider:before {
 }
 
 /* Responsif untuk Layar Lebar - 6 Kolom */
+/* Responsif untuk Layar Kecil (Menampilkan 1 kolom di bawah 576px) */
+@media (max-width: 575px) {
+  .card-body {
+    grid-template-columns: 1fr; /* Menampilkan 1 kolom */
+  }
+}
+
+/* Responsif untuk Layar Lebar - 3 Kolom untuk tablet (di antara 576px dan 768px) */
+@media (min-width: 576px) and (max-width: 768px) {
+  .card-body {
+    grid-template-columns: repeat(3, 1fr); /* Menampilkan 3 kolom */
+  }
+}
+
+/* Responsif untuk Layar Lebar - 6 Kolom untuk layar besar */
 @media (min-width: 768px) {
   .card-body {
     grid-template-columns: repeat(6, 1fr); /* Menampilkan 6 kolom per baris */
