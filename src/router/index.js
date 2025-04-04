@@ -16,7 +16,7 @@ import GedungList from '@/views/GedungList.vue'
 import RuanganList from '@/components/ruangans/RuanganList.vue'
 import RuanganForm from '@/components/ruangans/RuanganForm.vue'
 import ControlPerangkat from '@/views/ControlPerangkat.vue'
-
+import Subscriber from '@/views/Subscriber.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -26,7 +26,11 @@ const router = createRouter({
       component: HomeView,
       meta: { requiresAuth: true },
     },
-
+    {
+      path: '/subscriber',
+      name: 'Subscriber',
+      component: Subscriber,
+    },
     {
       path: '/foods',
       name: 'Foods',
